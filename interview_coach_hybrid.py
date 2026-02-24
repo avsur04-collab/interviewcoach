@@ -290,9 +290,9 @@ elif st.session_state.step == 2:
     
     # Video upload
     st.subheader("Upload Your Video Response")
-    st.info("📹 Record a 60-second (or less) video answering the question above. Save as MP4 format.")
+    st.info("📹 Record a 60-second (or less) video answering the question above. Save as MOV format.")
     
-    video_file = st.file_uploader("Upload your video response (MP4)", type=['mp4'])
+    video_file = st.file_uploader("Upload your video response (MOV)", type=['mov'])
     
     if video_file:
         st.success(f"✅ Uploaded: {video_file.name}")
@@ -316,7 +316,7 @@ elif st.session_state.step == 2:
             with st.spinner("🔍 Step 1/2: Gemini is analyzing your video..."):
                 try:
                     # Save video temporarily
-                    with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tmp_file:
+                    with tempfile.NamedTemporaryFile(delete=False, suffix='.mov') as tmp_file:
                         tmp_file.write(video_file.read())
                         tmp_path = tmp_file.name
                     
@@ -333,7 +333,7 @@ elif st.session_state.step == 2:
                         raise Exception("Video processing failed")
                     
                     # Configure Gemini for video analysis
-                    gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+                    gemini_model = genai.GenerativeModel('gemini-2.0-flash')
                     
                     # Get Gemini's multimodal observations
                     gemini_prompt = f"""Analyze this interview response video and provide ONLY observations about the candidate's delivery and presence. Do NOT provide coaching advice.
