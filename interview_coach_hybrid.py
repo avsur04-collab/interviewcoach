@@ -333,7 +333,7 @@ elif st.session_state.step == 2:
                         raise Exception("Video processing failed")
                     
                     # Configure Gemini for video analysis
-                    gemini_model = genai.GenerativeModel('gemini-2.0-flash')
+                    gemini_model = genai.GenerativeModel('gemini-3.0-flash')
                     
                     # Get Gemini's multimodal observations
                     gemini_prompt = f"""Analyze this interview response video and provide ONLY observations about the candidate's delivery and presence. Do NOT provide coaching advice.
@@ -456,7 +456,7 @@ elif st.session_state.step == 3:
     with tab2:
         st.markdown(f"""
         <div style="background-color: #EFF6FF; border-left: 4px solid #1E40AF; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-            <strong>Powered by Gemini 2.0 Flash</strong> - Multimodal video analysis
+            <strong>Powered by Gemini 3.0 Flash</strong> - Multimodal video analysis
         </div>
         """, unsafe_allow_html=True)
         
@@ -496,7 +496,7 @@ GEMINI'S VIDEO OBSERVATIONS (Multimodal Analysis)
 {st.session_state.gemini_observations}
 
 {'='*60}
-Powered by Gemini 2.0 Flash + Claude Sonnet 4
+Powered by Gemini 3.0 Flash + Claude Sonnet 4
 """
         
         st.download_button(
@@ -510,7 +510,7 @@ Powered by Gemini 2.0 Flash + Claude Sonnet 4
 st.divider()
 st.markdown("""
     <div style="text-align: center; color: #6B7280; padding: 2rem 0;">
-        <p><strong>Dual-AI Architecture:</strong> Gemini 2.0 Flash (Video Analysis) + Claude Sonnet 4 (Strategic Coaching)</p>
+        <p><strong>Dual-AI Architecture:</strong> Gemini 3.0 Flash (Video Analysis) + Claude Sonnet 4 (Strategic Coaching)</p>
         <p style="font-size: 0.85rem; margin-top: 0.5rem;">Get your API keys: 
         <a href="https://makersuite.google.com/app/apikey" target="_blank">Gemini</a> • 
         <a href="https://console.anthropic.com/" target="_blank">Claude</a>
