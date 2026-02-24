@@ -211,7 +211,7 @@ if st.session_state.step == 1:
                     # Use Claude to extract text from PDF
                     extract_message = client.messages.create(
                         model="claude-sonnet-4-20250514",
-                        max_tokens=1000,
+                        max_tokens=2000,
                         messages=[
                             {
                                 "role": "user",
@@ -268,6 +268,8 @@ Return ONLY the question, no preamble or explanation."""
                 
             except Exception as e:
                 st.error(f"❌ Error generating question: {str(e)}")
+                st.error(f"**Error type:** {type(e).__name__}")
+                st.info("💡 **Common fixes:**\n- Verify your Claude API key is correct (starts with 'sk-ant-')\n- Check you have API credits remaining\n- Try regenerating your API key at console.anthropic.com")
 
 # STEP 2: Record Video Response
 elif st.session_state.step == 2:
@@ -331,7 +333,7 @@ elif st.session_state.step == 2:
                         raise Exception("Video processing failed")
                     
                     # Configure Gemini for video analysis
-                    gemini_model = genai.GenerativeModel('gemini-2.0-flash-exp')
+                    gemini_model = genai.GenerativeModel('gemini-1.5-flash')
                     
                     # Get Gemini's multimodal observations
                     gemini_prompt = f"""Analyze this interview response video and provide ONLY observations about the candidate's delivery and presence. Do NOT provide coaching advice.
@@ -371,6 +373,8 @@ Be specific and objective. Report what you observe without judgment. These obser
                     
                 except Exception as e:
                     st.error(f"❌ Error with Gemini analysis: {str(e)}")
+                    st.error(f"**Error type:** {type(e).__name__}")
+                    st.info("💡 **Possible fixes:**\n- Check your Gemini API key is valid\n- Verify the model name is supported\n- Ensure video is under 60 seconds and MP4 format")
                     st.stop()
             
             # Now use Claude for coaching
